@@ -38,7 +38,7 @@ describe('Rectangle.contains()', () => {
         //    │
     });
 
-    it('should returns false if point located on rects left or top border', () => {
+    it('should return true if point located on rects left or top border', () => {
         expect(rect.contains({x: 2, y: 0})).toBeTruthy();
         expect(rect.contains({x: 0, y: 1})).toBeTruthy();
 
@@ -52,7 +52,7 @@ describe('Rectangle.contains()', () => {
         //    │
     });
 
-    it('should returns false if point located on rects right or bottom border', () => {
+    it('should return false if point located on rects right or bottom border', () => {
         expect(rect.contains({x: 3, y: 1})).toBeFalsy();
         expect(rect.contains({x: 2, y: 2})).toBeFalsy();
 
@@ -66,7 +66,7 @@ describe('Rectangle.contains()', () => {
         //    │
     });
 
-    it('should returns false if point is out of rect', () => {
+    it('should return false if point is out of rect', () => {
         expect(rect.contains({x: 4, y: 1})).toBeFalsy();
 
         //    0    1    2    3
@@ -86,7 +86,7 @@ describe('Rectangle.intersects()', () => {
         rect = new Rectangle(0, 0, 3, 2);
     });
 
-    it('should returns true if rects are intersected', () => {
+    it('should return true if rects are intersecting', () => {
         const otherRect = new Rectangle(1, 1, 3, 2);
         expect(rect.intersects(otherRect)).toBeTruthy();
 
@@ -100,7 +100,7 @@ describe('Rectangle.intersects()', () => {
         // 3  │   ○───────────────○
     });
 
-    it('should returns true if one rect contains other', () => {
+    it('should return true if one rect contains other', () => {
         const otherRect = new Rectangle(1, 0, 1, 2);
         expect(rect.intersects(otherRect)).toBeTruthy();
 
@@ -113,7 +113,7 @@ describe('Rectangle.intersects()', () => {
         //    │
     });
 
-    it('should returns false if rects are not intersected', () => {
+    it('should return false if rects are not intersected', () => {
         const otherRect = new Rectangle(10, 10, 1, 1);
         expect(rect.intersects(otherRect)).toBeFalsy();
     });
