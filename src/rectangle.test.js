@@ -20,6 +20,7 @@ describe('Rectangle getters', () => {
 });
 
 describe('Rectangle.contains()', () => {
+    /** @type {Rectangle} */
     let rect;
     beforeEach(() => {
         rect = new Rectangle(0, 0, 3, 2);
@@ -81,6 +82,7 @@ describe('Rectangle.contains()', () => {
 });
 
 describe('Rectangle.intersects()', () => {
+    /** @type {Rectangle} */
     let rect;
     beforeEach(() => {
         rect = new Rectangle(0, 0, 3, 2);
