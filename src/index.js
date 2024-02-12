@@ -10,6 +10,9 @@ const gameState = {
         ]
 };
 
+/**
+ * @param {number} numTicks
+ */
 function queueUpdates(numTicks) {
     for (let i = 0; i < numTicks; i++) {
         gameState.lastTick = gameState.lastTick + gameState.tickLength;
@@ -17,6 +20,9 @@ function queueUpdates(numTicks) {
     }
 }
 
+/**
+ * @param {DOMHighResTimeStamp} tFrame
+ */
 function draw(tFrame) {
     const context = canvas.getContext('2d');
 
@@ -32,15 +38,20 @@ function draw(tFrame) {
 
 }
 
+/**
+ * @param {number} tick
+ */
 function update(tick) {
 
     gameState.rects.forEach(r => {
         r.x += r.vx;
         r.y += r.vy;
-
     });
 }
 
+/**
+ * @param {DOMHighResTimeStamp} tFrame
+ */
 function run(tFrame) {
     gameState.stopCycle = window.requestAnimationFrame(run);
 
@@ -65,7 +76,7 @@ function setup() {
     canvas.height = window.innerHeight;
     gameState.lastTick = performance.now();
     gameState.lastRender = gameState.lastTick;
-    gameState.tickLength = 15; //ms
+    gameState.tickLength = 15; // ms
 
 }
 

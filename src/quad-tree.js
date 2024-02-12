@@ -1,6 +1,22 @@
 import Rectangle from './rectangle';
 
 export default class QuadTree {
+    // TODO: figure out specifics of untyped arrays
+    /** @type {Array} */
+    #points;
+    /** @type {Rectangle} */
+    #boundary;
+    /** @type {number} */
+    #capacity;
+    /** @type {boolean} */
+    #hasChildren;
+    /** @type {Array} */
+    #children;
+
+    /**
+     * @param {Rectangle} boundary
+     * @param {number} capacity
+     */
     constructor(boundary, capacity = 4) {
         if (!boundary) {
             throw TypeError('boundary is null or undefined');
@@ -10,37 +26,47 @@ export default class QuadTree {
             throw TypeError('boundary should be a Rectangle');
         }
 
-        this._points = [];
-        this._boundary = boundary;
-        this._capacity = capacity;
-        this._hasChildren = false;
-        this._children = [];
+        this.#points = [];
+        this.#boundary = boundary;
+        this.#capacity = capacity;
+        this.#hasChildren = false;
+        this.#children = [];
     }
 
+    /**
+     * @param {*} point
+     * @returns {boolean} operation result
+     */
     insert(point) {
         return true;
     }
 
+    /** @returns {number} */
     get length() {
-        let count = this._points.length;
-        if (this._hasChildren) {
-            // handle children somehow
+        let count = this.#points.length;
+        if (this.#hasChildren) {
+            // TODO: handle children somehow
         }
         return count;
     }
 
+    /**
+     * @param {Rectangle} rect
+     * @param {Array} found
+     * @returns {Array}
+     */
     queryRange(rect, found = []) {
         return found;
     }
 
-    _subdivide() {
+    #subdivide() {
     }
 
     clear() {
         // clear _points and _children arrays
         // see https://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript
-        this._points = [];
-        this._children = [];
-        this._hasChildren = false;
+        this.#points = [];
+        this.#children = [];
+        this.#hasChildren = false;
     }
 }
