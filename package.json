@@ -1,11 +1,11 @@
 {
   "name": "ping-pong-test",
   "version": "1.0.0",
-  "description": "",
+  "description": "Collision detection",
   "main": "index.js",
   "scripts": {
     "coverage": "jest --coverage",
-    "start": "parcel index.html",
+    "start": "parcel index.html --open",
     "test": "jest --verbose",
     "watch": "jest --watch"
   },
