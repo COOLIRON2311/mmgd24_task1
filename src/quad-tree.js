@@ -1,36 +1,36 @@
-import Rectangle from './rectangle'
+import Rectangle from './rectangle';
 
 export default class QuadTree {
     constructor(boundary, capacity = 4) {
         if (!boundary) {
-            throw TypeError('boundary is null or undefined')
+            throw TypeError('boundary is null or undefined');
         }
 
         if (!(boundary instanceof Rectangle)) {
-            throw TypeError('boundary should be a Rectangle')
+            throw TypeError('boundary should be a Rectangle');
         }
 
-        this._points = []
-        this._boundary = boundary
-        this._capacity = capacity
-        this._hasChildren = false
-        this._children = []
+        this._points = [];
+        this._boundary = boundary;
+        this._capacity = capacity;
+        this._hasChildren = false;
+        this._children = [];
     }
 
     insert(point) {
-        return true
+        return true;
     }
 
     get length() {
-        let count = this._points.length
+        let count = this._points.length;
         if (this._hasChildren) {
-            // handle childrens somehow
+            // handle children somehow
         }
-        return count
+        return count;
     }
 
     queryRange(rect, found = []) {
-        return found
+        return found;
     }
 
     _subdivide() {
@@ -39,8 +39,8 @@ export default class QuadTree {
     clear() {
         // clear _points and _children arrays
         // see https://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript
-        this._points = []
-        this._children = []
-        this._hasChildren = false
+        this._points = [];
+        this._children = [];
+        this._hasChildren = false;
     }
 }
