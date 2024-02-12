@@ -1,17 +1,12 @@
+import Point from './point';
 import Rectangle from './rectangle';
 
 export default class QuadTree {
-    // TODO: figure out specifics of untyped arrays
-    /** @type {Array} */
-    #points;
-    /** @type {Rectangle} */
-    #boundary;
-    /** @type {number} */
-    #capacity;
-    /** @type {boolean} */
-    #hasChildren;
-    /** @type {Array} */
-    #children;
+    /** @type {Point[]}    */ #points;
+    /** @type {Rectangle}  */ #boundary;
+    /** @type {number}     */ #capacity;
+    /** @type {boolean}    */ #hasChildren;
+    /** @type {QuadTree[]} */ #children;
 
     /**
      * @param {Rectangle} boundary
@@ -34,14 +29,13 @@ export default class QuadTree {
     }
 
     /**
-     * @param {*} point
+     * @param {Point} point
      * @returns {boolean} operation result
      */
     insert(point) {
         return true;
     }
 
-    /** @returns {number} */
     get length() {
         let count = this.#points.length;
         if (this.#hasChildren) {

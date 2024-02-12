@@ -1,16 +1,12 @@
+import Point from './point';
+
 export default class Rectangle {
-    /** @type {number} */
-    x;
-    /** @type {number} */
-    y;
-    /** @type {number} */
-    w;
-    /** @type {number} */
-    h;
-    /** @type {number} */
-    vx;
-    /** @type {number} */
-    vy;
+    /** @type {number} */ x;
+    /** @type {number} */ y;
+    /** @type {number} */ w;
+    /** @type {number} */ h;
+    /** @type {number} */ vx;
+    /** @type {number} */ vy;
 
     /**
      * @param {number} x
@@ -46,7 +42,7 @@ export default class Rectangle {
     }
 
     /**
-     * @param {*} point
+     * @param {Point} point
      * @returns {boolean}
      */
     contains(point) {
