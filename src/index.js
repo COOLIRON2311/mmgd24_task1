@@ -42,7 +42,6 @@ function draw(tFrame) {
  * @param {number} tick
  */
 function update(tick) {
-
     gameState.rects.forEach(r => {
         r.x += r.vx;
         r.y += r.vy;
