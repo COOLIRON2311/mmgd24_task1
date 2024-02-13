@@ -1,12 +1,11 @@
-import Rectangle from './rectangle';
+import Circle from './shapes/circle';
 
 const canvas = document.getElementById('canvas');
-
 const gameState = {
-    rects:
+    objects:
         [
-            new Rectangle(10, 10, 20, 20, 1, 0),
-            new Rectangle(500, 10, 20, 20, -1, 0)
+            new Circle('#00ff00', 50, 50, 20, 1, 0),
+            new Circle('#0000ff', 500, 50, 20, -1, 0)
         ]
 };
 
@@ -24,27 +23,45 @@ function queueUpdates(numTicks) {
  * @param {DOMHighResTimeStamp} tFrame
  */
 function draw(tFrame) {
+    /** @type {CanvasRenderingContext2D} */
     const context = canvas.getContext('2d');
 
     // clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     // draw
-    gameState.rects.forEach(r => {
-        context.beginPath();
-        context.rect(r.x, r.y, r.w, r.h);
-        context.fill();
+    gameState.objects.forEach(o => {
+        o.draw(context);
     });
-
 }
 
 /**
  * @param {number} tick
  */
 function update(tick) {
-    gameState.rects.forEach(r => {
-        r.x += r.vx;
-        r.y += r.vy;
+    // Naïve Collision Detection
+    // TODO: Implement it using Quad-trees
+    gameState.objects.forEach(o1 => {
+        gameState.objects.forEach(o2 => {
+            if (o1 !== o2) {
+                if (o1.AABBOverlap(o2)) {
+                    o1.vx = -o1.vx;
+                    o1.vy = -o1.vy;
+                }
+            }
+        });
+
+        // Window border check
+        if (0 > o1.AABB.left || window.innerWidth < o1.AABB.right)
+            o1.vx = -o1.vx;
+        if (0 > o1.AABB.top || window.innerHeight < o1.AABB.bottom)
+            o1.vy = -o1.vy;
+    });
+
+    // Update objects position
+    gameState.objects.forEach(o => {
+        o.x += o.vx;
+        o.y += o.vy;
     });
 }
 
@@ -76,7 +93,6 @@ function setup() {
     gameState.lastTick = performance.now();
     gameState.lastRender = gameState.lastTick;
     gameState.tickLength = 15; // ms
-
 }
 
 setup();

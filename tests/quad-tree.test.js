@@ -1,5 +1,5 @@
-import Rectangle from './rectangle';
-import QuadTree from './quad-tree';
+import Rectangle from '../src/base/rectangle';
+import QuadTree from '../src/quad-tree';
 
 describe('QuadTree', () => {
     it('should be empty in the initial state', () => {

@@ -1,5 +1,5 @@
-import Point from './point';
-import Rectangle from './rectangle';
+import Point from './base/point';
+import Rectangle from './base/rectangle';
 
 export default class QuadTree {
     /** @type {Point[]}    */ #points;
