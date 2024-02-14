@@ -7,7 +7,8 @@
     "coverage": "jest --coverage",
     "start": "parcel index.html --open",
     "test": "jest --verbose",
-    "watch": "jest --watch"
+    "watch": "jest --watch",
+    "clean": "rm -r dist .parcel-cache"
   },
   "repository": {
     "type": "git",
