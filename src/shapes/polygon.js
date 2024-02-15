@@ -31,14 +31,16 @@ export default class Polygon extends Shape {
         else
             angle = Shape.radians(-90);
 
-        this.vertices = Array.from({ length: this.n }, () => {
-            const p = {
-                x: this.x + this.r * Math.cos(angle),
-                y: this.y + this.r * Math.sin(angle)
-            };
+        this.vertices = [];
+        for (let i = 0; i < this.n; i++) {
+            this.vertices.push(
+                {
+                    x: this.x + this.r * Math.cos(angle),
+                    y: this.y + this.r * Math.sin(angle)
+                }
+            );
             angle += step;
-            return p;
-        });
+        }
 
         // Calculate AABB
         const min_x = this.vertices.reduce((a, b) => a.x < b.x ? a : b).x;
