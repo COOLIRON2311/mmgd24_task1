@@ -7,7 +7,8 @@ const gameState = {
     objects:
         [
             new Circle(50, 50, 20, 5, 0, '#00ff00'),
-            new Circle(500, 50, 20, -5, 0, '#0000ff')
+            new Circle(500, 50, 20, -5, 0, '#0000ff'),
+            new Polygon(100, 100, 6, 20, 5, 5, '#ff0000')
         ]
 };
 
@@ -84,7 +85,7 @@ function update(tick) {
     // Update objects position
     gameState.objects.forEach(o => {
         if (o.active) {
-            o.x += o.vx;
+            o.move();
             o.y += o.vy;
         }
     });

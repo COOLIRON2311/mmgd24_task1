@@ -1,13 +1,12 @@
-import Rectangle from './rectangle';
-
 export default class Shape {
-    /** @type {number} Object hit points   */ lives;
-    /** @type {string} Object color        */ color;
-    /** @type {number} X center coordinate */ x;
-    /** @type {number} Y center coordinate */ y;
-    /** @type {number} X velocity          */ vx;
-    /** @type {number} Y velocity          */ vy;
-    /** @type {number} Active              */ active;
+    /** @type {number} Object hit points          */ lives;
+    /** @type {string} Object color               */ color;
+    /** @type {number} X center coordinate        */ x;
+    /** @type {number} Y center coordinate        */ y;
+    /** @type {number} X velocity                 */ vx;
+    /** @type {number} Y velocity                 */ vy;
+    /** @type {number} Active                     */ active;
+    /** @type {Polygon} Axis-Aligned Bounding Box */ AABB;
 
     /**
      *
@@ -27,14 +26,16 @@ export default class Shape {
         this.vy = vy;
     }
 
-    /** @returns {Rectangle} Axis-Aligned Bounding Box*/
-    get AABB() { return null; }
-
     /**
      * Draw `this` object using provided `context`
      * @param {CanvasRenderingContext2D} context
      */
     draw(context) { }
+
+    /**
+     * Moves `this` object by (`vx`, `vy`)
+     */
+    move() { }
 
     /**
      * Check if AABB of `this` shape overlaps with AABB of `other` shape

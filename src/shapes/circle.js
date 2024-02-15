@@ -15,10 +15,9 @@ export default class Circle extends Shape {
     constructor(x, y, r, vx, vy, color = null) {
         super(x, y, vx, vy, color);
         this.r = r;
-    }
 
-    get AABB() {
-        return new Rectangle(this.x - this.r, this.y - this.r, 2 * this.r, 2 * this.r);
+        // Calculate AABB
+        this.AABB = new Rectangle(this.x - this.r, this.y - this.r, 2 * this.r, 2 * this.r);
     }
 
     /**
@@ -34,9 +33,20 @@ export default class Circle extends Shape {
 
         context.fill();
         context.stroke();
-        
+
         context.fillStyle = style;
         // Draw AABB (uncomment for debugging)
-        // this.AABB.draw(context);
+        this.AABB.draw(context);
+    }
+
+    /**
+     * Moves `this` circle by (`vx`, `vy`)
+     */
+    move() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        this.AABB.x += this.vx;
+        this.AABB.y += this.vy;
     }
 }
