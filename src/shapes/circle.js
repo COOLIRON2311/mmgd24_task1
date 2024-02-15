@@ -35,8 +35,9 @@ export default class Circle extends Shape {
         context.stroke();
 
         context.fillStyle = style;
+
         // Draw AABB (uncomment for debugging)
-        this.AABB.draw(context);
+        // this.AABB.draw(context);
     }
 
     /**

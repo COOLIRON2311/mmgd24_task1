@@ -71,7 +71,7 @@ export default class Polygon extends Shape {
         context.fillStyle = style;
 
         // Draw AABB (uncomment for debugging)
-        this.AABB.draw(context);
+        // this.AABB.draw(context);
     }
 
     /**

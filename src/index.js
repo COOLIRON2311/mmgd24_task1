@@ -6,11 +6,71 @@ const canvas = document.getElementById('canvas');
 const gameState = {
     objects:
         [
-            new Circle(50, 50, 20, 5, 0, '#00ff00'),
-            new Circle(500, 50, 20, -5, 0, '#0000ff'),
-            new Polygon(100, 100, 6, 20, 5, 5, '#ff0000')
+            // new Circle(50, 50, 20, 5, 0, '#00ff00'),
+            // new Circle(500, 50, 20, -5, 0, '#0000ff'),
+            // new Polygon(100, 100, 6, 20, 5, 5, '#ff0000')
         ]
 };
+
+//#region Shapes generation
+const r = 20;
+const speedX = 2;
+const speedY = 2;
+
+// Circles
+for (let i = 0; i < 10; i++) {
+    const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
+    const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
+
+    let vx;
+    do {
+        vx = randInRange(-speedX, speedX);
+    } while (vx === 0);
+
+    let vy;
+    do {
+        vy = randInRange(-speedY, speedY);
+    } while (vy === 0);
+
+    gameState.objects.push(new Circle(x, y, r, vx, vy));
+}
+
+// Triangles
+for (let i = 0; i < 10; i++) {
+    const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
+    const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
+
+    let vx;
+    do {
+        vx = randInRange(-speedX, speedX);
+    } while (vx === 0);
+
+    let vy;
+    do {
+        vy = randInRange(-speedY, speedY);
+    } while (vy === 0);
+
+    gameState.objects.push(new Polygon(x, y, 3, r, vx, vy));
+}
+
+// Hexagons
+for (let i = 0; i < 10; i++) {
+    const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
+    const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
+
+    let vx;
+    do {
+        vx = randInRange(-speedX, speedX);
+    } while (vx === 0);
+
+    let vy;
+    do {
+        vy = randInRange(-speedY, speedY);
+    } while (vy === 0);
+
+    gameState.objects.push(new Polygon(x, y, 6, r, vx, vy));
+}
+//#endregion Shapes generation
 
 /**
  * @param {number} numTicks
@@ -50,12 +110,9 @@ function update(tick) {
         if (!o1.active)
             continue;
 
-        for (let j = i+1; j < gameState.objects.length; j++) {
+        for (let j = i + 1; j < gameState.objects.length; j++) {
             const o2 = gameState.objects[j];
             if (!o2.active)
-                continue;
-
-            if (i == j)
                 continue;
 
             if (o1.AABBOverlap(o2)) {
@@ -86,7 +143,6 @@ function update(tick) {
     gameState.objects.forEach(o => {
         if (o.active) {
             o.move();
-            o.y += o.vy;
         }
     });
 }
@@ -119,6 +175,16 @@ function setup() {
     gameState.lastTick = performance.now();
     gameState.lastRender = gameState.lastTick;
     gameState.tickLength = 15; // ms
+}
+
+/**
+ * Returns a random number between min (inclusive) and max (exclusive)
+ * @param {number} min
+ * @param {number} max
+ * @returns
+ */
+function randInRange(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 setup();
