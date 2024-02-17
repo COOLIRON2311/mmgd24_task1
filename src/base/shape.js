@@ -26,6 +26,11 @@ export default class Shape {
         this.vy = vy;
     }
 
+    /** @returns {Point} */
+    get center() {
+        return { x: this.x, y: this.y };
+    }
+
     /**
      * Draw `this` object using provided `context`
      * @param {CanvasRenderingContext2D} context
@@ -36,14 +41,6 @@ export default class Shape {
      * Moves `this` object by (`vx`, `vy`)
      */
     move() { }
-
-    /**
-     * Check if AABB of `this` shape overlaps with AABB of `other` shape
-     * @param {Shape} other another shape
-     */
-    AABBOverlap(other) {
-        return this.AABB.intersects(other.AABB);
-    }
 
     /**
      * Handle collision with other object

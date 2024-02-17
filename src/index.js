@@ -1,3 +1,4 @@
+import Collisions from './base/collisions';
 import Circle from './shapes/circle';
 import Polygon from './shapes/polygon';
 
@@ -22,15 +23,9 @@ for (let i = 0; i < 10; i++) {
     const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
     const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
 
-    let vx;
-    do {
-        vx = randInRange(-speedX, speedX);
-    } while (vx === 0);
-
-    let vy;
-    do {
-        vy = randInRange(-speedY, speedY);
-    } while (vy === 0);
+    const a = randInRange(1, 360);
+    const vx = Math.cos(a) * speedX;
+    const vy = Math.sin(a) * speedY;
 
     gameState.objects.push(new Circle(x, y, r, vx, vy));
 }
@@ -40,15 +35,9 @@ for (let i = 0; i < 10; i++) {
     const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
     const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
 
-    let vx;
-    do {
-        vx = randInRange(-speedX, speedX);
-    } while (vx === 0);
-
-    let vy;
-    do {
-        vy = randInRange(-speedY, speedY);
-    } while (vy === 0);
+    const a = randInRange(0, 360);
+    const vx = Math.cos(a) * speedX;
+    const vy = Math.sin(a) * speedY;
 
     gameState.objects.push(new Polygon(x, y, 3, r, vx, vy));
 }
@@ -58,15 +47,9 @@ for (let i = 0; i < 10; i++) {
     const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
     const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
 
-    let vx;
-    do {
-        vx = randInRange(-speedX, speedX);
-    } while (vx === 0);
-
-    let vy;
-    do {
-        vy = randInRange(-speedY, speedY);
-    } while (vy === 0);
+    const a = randInRange(1, 360);
+    const vx = Math.cos(a) * speedX;
+    const vy = Math.sin(a) * speedY;
 
     gameState.objects.push(new Polygon(x, y, 6, r, vx, vy));
 }
@@ -115,7 +98,7 @@ function update(tick) {
             if (!o2.active)
                 continue;
 
-            if (o1.AABBOverlap(o2)) {
+            if (Collisions.PreciseOverlap(o1, o2)) {
                 o1.vx = -o1.vx;
                 o1.vy = -o1.vy;
                 o1.handleCollision();
