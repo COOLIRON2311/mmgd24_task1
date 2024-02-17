@@ -14,12 +14,13 @@ const gameState = {
 };
 
 //#region Shapes generation
-const r = 20;
+const N_objects = 10;
 const speedX = 2;
 const speedY = 2;
+const r = 20;
 
 // Circles
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < N_objects; i++) {
     const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
     const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
 
@@ -31,7 +32,7 @@ for (let i = 0; i < 10; i++) {
 }
 
 // Triangles
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < N_objects; i++) {
     const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
     const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
 
@@ -43,7 +44,7 @@ for (let i = 0; i < 10; i++) {
 }
 
 // Hexagons
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < N_objects; i++) {
     const x = randInRange(0 + r / 2, window.innerWidth - r / 2);
     const y = randInRange(0 + r / 2, window.innerHeight - r / 2);
 

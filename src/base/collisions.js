@@ -3,7 +3,9 @@ import Polygon from '../shapes/polygon';
 import Point from './point';
 import Shape from './shape';
 
-
+/**
+ * https://www.jeffreythompson.org/collision-detection/table_of_contents.php
+ */
 export default class Collisions {
     /**
      * Check if AABB of `a` overlaps with AABB of `b`
@@ -185,7 +187,7 @@ export default class Collisions {
     /**
      * Check if point `p` is inside polygon `poly`
      * @param {Polygon} poly polygon
-     * @param {Point} p point
+     * @param {Point | Shape} p point or shape center
      */
     static #polygonPoint(poly, p) {
         const vx = poly.vertices;
@@ -200,7 +202,7 @@ export default class Collisions {
             const vc = vx[current]; // current vertex
             const vn = vx[next]; // next vertex
 
-            if (((vc.y > p.y && vn.y < p.y) || (vc.y < p.y && vn.y > p.y)) &&
+            if (((vc.y >= p.y && vn.y < p.y) || (vc.y < p.y && vn.y >= p.y)) &&
                 (p.x < (vn.x - vc.x) * (p.y - vc.y) / (vn.y - vc.y) + vc.x))
                 collision = !collision;
         }
@@ -238,10 +240,10 @@ export default class Collisions {
      * @param {Polygon} p2
      */
     static #polygonPolygon(p1, p2) {
-        if (this.#polygonPoint(p2, p1.vertices[0]))
+        if (this.#polygonPoint(p2, p1))
             return true;
 
-        if (this.#polygonPoint(p1, p2.vertices[0]))
+        if (this.#polygonPoint(p1, p2))
             return true;
 
         const vx = p1.vertices;

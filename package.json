@@ -2,13 +2,15 @@
   "name": "ping-pong-test",
   "version": "1.0.0",
   "description": "Collision detection",
-  "main": "index.js",
   "scripts": {
     "coverage": "jest --coverage",
     "start": "parcel index.html --open",
     "test": "jest --verbose",
     "watch": "jest --watch",
-    "clean": "rm -r dist .parcel-cache"
+    "clean": "rm -r dist .parcel-cache",
+    "build": "parcel build index.html --no-source-maps --public-url ./",
+    "predeploy": "npm run clean && npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,14 +20,20 @@
   "bugs": {
     "url": "https://github.com/Wolwer1nE/ping-pong-test/issues"
   },
-  "homepage": "https://github.com/Wolwer1nE/ping-pong-test#readme",
+  "homepage": "https://cooliron2311.github.io/mmgd24_task1",
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@parcel/babel-preset-env": "^2.7.0",
     "@types/jest": "^29.5.12",
     "core-js": "^3.35.1",
     "eslint": "^8.56.0",
+    "gh-pages": "^6.1.1",
     "jest": "^29.0.3",
     "parcel": "^2.7.0"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text"
+    ]
   }
 }
