@@ -240,8 +240,10 @@ export default class Collisions {
     static #polygonPolygon(p1, p2) {
         if (this.#polygonPoint(p2, p1.vertices[0]))
             return true;
+
         if (this.#polygonPoint(p1, p2.vertices[0]))
             return true;
+
         const vx = p1.vertices;
 
         let next = 0;

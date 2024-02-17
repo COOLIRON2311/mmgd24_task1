@@ -98,6 +98,9 @@ function update(tick) {
             if (!o2.active)
                 continue;
 
+            if (!Collisions.AABBOverlap(o1, o2))
+                continue;
+
             if (Collisions.PreciseOverlap(o1, o2)) {
                 o1.vx = -o1.vx;
                 o1.vy = -o1.vy;
