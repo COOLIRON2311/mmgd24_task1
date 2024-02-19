@@ -1,12 +1,14 @@
+import Rectangle from './rectangle';
+
 export default class Shape {
-    /** @type {number} Object hit points          */ lives;
-    /** @type {string} Object color               */ color;
-    /** @type {number} X center coordinate        */ x;
-    /** @type {number} Y center coordinate        */ y;
-    /** @type {number} X velocity                 */ vx;
-    /** @type {number} Y velocity                 */ vy;
-    /** @type {number} Active                     */ active;
-    /** @type {Polygon} Axis-Aligned Bounding Box */ AABB;
+    /** @type {number} Object hit points            */ lives;
+    /** @type {string} Object color                 */ color;
+    /** @type {number} X center coordinate          */ x;
+    /** @type {number} Y center coordinate          */ y;
+    /** @type {number} X velocity                   */ vx;
+    /** @type {number} Y velocity                   */ vy;
+    /** @type {number} Active                       */ active;
+    /** @type {Rectangle} Axis-Aligned Bounding Box */ AABB;
 
     /**
      *

@@ -1,5 +1,3 @@
-import Point from './point';
-
 export default class Rectangle {
     /** @type {number} Top left corner X   */ x;
     /** @type {number} Top left corner Y   */ y;
@@ -39,16 +37,24 @@ export default class Rectangle {
         return { x: this.x + this.w / 2, y: this.y + this.h / 2 };
     }
 
+    get size() {
+        return { x: this.w, y: this.h };
+    }
+
+    get top_left() {
+        return {x: this.x, y: this.y};
+    }
+
     /**
-     * @param {Point} point
+     * @param {Rectangle} rect
      * @returns {boolean}
      */
-    contains(point) {
+    contains(rect) {
         return (
-            point.x >= this.x &&
-            point.x < this.x + this.w &&
-            point.y >= this.y &&
-            point.y < this.y + this.h
+            rect.x >= this.x &&
+            rect.x < this.x + this.w &&
+            rect.y >= this.y &&
+            rect.y < this.y + this.h
         );
     }
 
