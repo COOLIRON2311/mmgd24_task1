@@ -2,7 +2,6 @@
 
 import Collisions from './base/collisions';
 import Rectangle from './base/rectangle';
-import Shape from './base/shape';
 import QuadTree from './quad-tree';
 import Circle from './shapes/circle';
 import Polygon from './shapes/polygon';

@@ -14,6 +14,9 @@ class Node {
     }
 }
 
+/**
+ * https://pvigier.github.io/2019/08/04/quadtree-collision-detection.html
+ */
 export default class QuadTree {
     /** @type {Rectangle}  */ #boundary;
     /** @type {number}     */ #depth;
@@ -40,7 +43,7 @@ export default class QuadTree {
         this.#depth = depth;
     }
 
-
+    /** For debug use only */
     get nodes() {
         return this.#root;
     }
