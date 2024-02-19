@@ -1,4 +1,9 @@
+// @ts-nocheck
+
 import Collisions from './base/collisions';
+import Rectangle from './base/rectangle';
+import Shape from './base/shape';
+import QuadTree from './quad-tree';
 import Circle from './shapes/circle';
 import Polygon from './shapes/polygon';
 
@@ -13,11 +18,15 @@ const gameState = {
         ]
 };
 
+const qt = new QuadTree(
+    new Rectangle(0, 0, window.innerWidth, window.innerHeight)
+);
+
 //#region Shapes generation
-const N_objects = 10;
+const N_objects = 666; // This prank is gonna be crazy 💀💀
 const speedX = 2;
 const speedY = 2;
-const r = 20;
+const r = 2;
 
 // Circles
 for (let i = 0; i < N_objects; i++) {
@@ -87,57 +96,48 @@ function draw(tFrame) {
  * @param {number} tick
  */
 function update(tick) {
-    // Naïve Collision Detection
-    // TODO: Implement it using Quad-trees
-    for (let i = 0; i < gameState.objects.length; i++) {
-        const o1 = gameState.objects[i];
-        if (!o1.active)
-            continue;
+    qt.clear();
 
-        for (let j = i + 1; j < gameState.objects.length; j++) {
-            const o2 = gameState.objects[j];
-            if (!o2.active)
-                continue;
+    gameState.objects.forEach(obj => {
+        if (obj.active)
+            qt.add(obj);
+    });
 
-            if (!Collisions.AABBOverlap(o1, o2))
-                continue;
-
-            if (Collisions.PreciseOverlap(o1, o2)) {
-                o1.vx = -o1.vx;
-                o1.vy = -o1.vy;
-                o1.handleCollision();
-
-                o2.vx = -o2.vx;
-                o2.vy = -o2.vy;
-                o2.handleCollision();
-            }
-
-        }
-
-        // Window border check
-        if (0 > o1.AABB.left || window.innerWidth < o1.AABB.right) {
+    qt.findAllIntersections().forEach(([o1, o2], _) => {
+        if (Collisions.PreciseOverlap(o1, o2)) {
             o1.vx = -o1.vx;
-            o1.handleCollision(true);
-        }
-
-        if (0 > o1.AABB.top || window.innerHeight < o1.AABB.bottom) {
             o1.vy = -o1.vy;
-            o1.handleCollision(true);
+            o1.handleCollision();
+
+            o2.vx = -o2.vx;
+            o2.vy = -o2.vy;
+            o2.handleCollision();
         }
-    }
+    });
 
     // Update objects position
-    gameState.objects.forEach(o => {
-        if (o.active) {
-            o.move();
+    gameState.objects.forEach(obj => {
+        if (obj.active) {
+            // Window border check
+            if (0 > obj.AABB.left || window.innerWidth < obj.AABB.right) {
+                obj.vx = -obj.vx;
+                obj.handleCollision(true);
+            }
+
+            if (0 > obj.AABB.top || window.innerHeight < obj.AABB.bottom) {
+                obj.vy = -obj.vy;
+                obj.handleCollision(true);
+            }
+
+            obj.move();
         }
     });
 }
 
 /**
- * @param {DOMHighResTimeStamp} tFrame
+ * @param {DOMHighResTimeStamp} [tFrame=undefined]
  */
-function run(tFrame) {
+function run(tFrame = undefined) {
     gameState.stopCycle = window.requestAnimationFrame(run);
 
     const nextTick = gameState.lastTick + gameState.tickLength;

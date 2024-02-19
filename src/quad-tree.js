@@ -10,7 +10,7 @@ class Node {
     }
 
     get isLeaf() {
-        return this.children.length > 0;
+        return this.children.length === 0;
     }
 }
 
@@ -38,6 +38,11 @@ export default class QuadTree {
         this.#capacity = capacity;
         this.#root = new Node();
         this.#depth = depth;
+    }
+
+
+    get nodes() {
+        return this.#root;
     }
 
     //#region Helper methods
@@ -175,7 +180,7 @@ export default class QuadTree {
         // console.assert(node.isLeaf, 'Only leaves can be split');
 
         // Create children
-        for (let i = 0; i < 4; i++)  // Quad damage 💀
+        for (let i = 0; i < 4; i++)  // Quad (memory) damage 💀
             node.children.push(new Node());
 
         const new_objects = []; // objects which will remain in this node
@@ -340,7 +345,6 @@ export default class QuadTree {
 
     clear() {
         // clear tree nodes
-        // see https://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript
         this.#root = new Node();
     }
 }

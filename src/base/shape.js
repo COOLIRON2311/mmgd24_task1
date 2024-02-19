@@ -1,3 +1,4 @@
+import Point from './point';
 import Rectangle from './rectangle';
 
 export default class Shape {
@@ -7,7 +8,7 @@ export default class Shape {
     /** @type {number} Y center coordinate          */ y;
     /** @type {number} X velocity                   */ vx;
     /** @type {number} Y velocity                   */ vy;
-    /** @type {number} Active                       */ active;
+    /** @type {boolean} Active                      */ active;
     /** @type {Rectangle} Axis-Aligned Bounding Box */ AABB;
 
     /**
@@ -21,7 +22,7 @@ export default class Shape {
     constructor(x, y, vx, vy, color = null) {
         this.color = color || Shape.randomHexColor();
         this.active = true;
-        this.lives = 3;
+        this.lives = 100;
         this.x = x;
         this.y = y;
         this.vx = vx;
